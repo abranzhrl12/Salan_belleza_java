@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Proyecto_Salon_Belleza" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Proyecto_Salon_Belleza.</description>
+    <import file="nbproject/build-impl.xml"/>
+    
+    <!-- Target para descargar dependencias -->
+    <target name="-pre-init">
+        <mkdir dir="web/WEB-INF/lib"/>
+        
+        <!-- Descargar Jakarta Persistence API -->
+        <get src="https://repo1.maven.org/maven2/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar" 
+             dest="web/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar" 
+             skipexisting="true"/>
+        
+        <!-- Descargar Hibernate Core -->
+        <get src="https://repo1.maven.org/maven2/org/hibernate/orm/hibernate-core/6.2.7.Final/hibernate-core-6.2.7.Final.jar" 
+             dest="web/WEB-INF/lib/hibernate-core-6.2.7.Final.jar" 
+             skipexisting="true"/>
+        
+        <!-- Descargar MySQL Connector -->
+        <get src="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.28/mysql-connector-java-8.0.28.jar" 
+             dest="web/WEB-INF/lib/mysql-connector-java-8.0.28.jar" 
+             skipexisting="true"/>
+        
+        <!-- Descargar JSTL API -->
+        <get src="https://repo1.maven.org/maven2/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar" 
+             dest="web/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-3.0.0.jar" 
+             skipexisting="true"/>
+        
+        <!-- Descargar JSTL Implementation -->
+        <get src="https://repo1.maven.org/maven2/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.0/jakarta.servlet.jsp.jstl-3.0.0.jar" 
+             dest="web/WEB-INF/lib/jakarta.servlet.jsp.jstl-3.0.0.jar" 
+             skipexisting="true"/>
+        
+        <!-- Descargar Bean Validation API -->
+        <get src="https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar" 
+             dest="web/WEB-INF/lib/jakarta.validation-api-3.0.2.jar" 
+             skipexisting="true"/>
+        
+        <!-- Descargar Hibernate Validator -->
+        <get src="https://repo1.maven.org/maven2/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar" 
+             dest="web/WEB-INF/lib/hibernate-validator-8.0.1.Final.jar" 
+             skipexisting="true"/>
+        
+        <echo message="Dependencias descargadas exitosamente"/>
+    </target>
+</project>
