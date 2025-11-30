@@ -1,7 +1,6 @@
 package com.salonbelleza.servlet;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import java.io.IOException;
  * Servlet para manejar el cierre de sesión de usuarios
  * @author Sistema Salon Belleza
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
     
     // private static final Logger logger = LoggerFactory.getLogger(LogoutServlet.class);

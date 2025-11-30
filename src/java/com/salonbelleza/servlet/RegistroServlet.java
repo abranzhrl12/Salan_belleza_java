@@ -5,7 +5,6 @@ import com.salonbelleza.model.RolUsuario;
 import com.salonbelleza.model.Usuario;
 import com.salonbelleza.util.JPAUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import java.io.IOException;
  * Servlet para manejar el registro de nuevos usuarios
  * @author Sistema Salon Belleza
  */
-@WebServlet(name = "RegistroServlet", urlPatterns = "/registro")
 public class RegistroServlet extends HttpServlet {
     
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();

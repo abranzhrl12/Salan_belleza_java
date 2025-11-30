@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    
+    <display-name>Salon de Belleza - Fixed</display-name>
+    <description>Configuración corregida sin conflictos</description>
+    
+    <!-- Filtros -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>com.salonbelleza.filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.salonbelleza.filter.AuthenticationFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Servlets principales -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.LoginServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RegistroServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.RegistroServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>RegistroServlet</servlet-name>
+        <url-pattern>/registro</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EmpleadoServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.EmpleadoServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EmpleadoServlet</servlet-name>
+        <url-pattern>/admin/empleados/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>InitDataServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.InitDataServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>InitDataServlet</servlet-name>
+        <url-pattern>/init-data</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlets de prueba -->
+    <servlet>
+        <servlet-name>TestConnectionServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.TestConnectionServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>TestConnectionServlet</servlet-name>
+        <url-pattern>/test-connection</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SimpleTestServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.SimpleTestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>SimpleTestServlet</servlet-name>
+        <url-pattern>/simple-test</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Página de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
+</web-app>

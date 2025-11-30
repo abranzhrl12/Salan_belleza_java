@@ -5,30 +5,10 @@
          https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
     
-    <display-name>Salon de Belleza</display-name>
-    <description>Sistema de gestión para salón de belleza</description>
+    <display-name>Salon de Belleza - Fixed</display-name>
+    <description>Configuración corregida sin conflictos</description>
     
-    <!-- Configuración de sesión -->
-    <session-config>
-        <session-timeout>30</session-timeout>
-        <cookie-config>
-            <http-only>true</http-only>
-            <secure>false</secure>
-        </cookie-config>
-    </session-config>
-    
-    <!-- Filtro de autenticación -->
-    <filter>
-        <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.salonbelleza.filter.AuthenticationFilter</filter-class>
-    </filter>
-    
-    <filter-mapping>
-        <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
-    </filter-mapping>
-    
-    <!-- Filtro de codificación -->
+    <!-- Filtros -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>com.salonbelleza.filter.CharacterEncodingFilter</filter-class>
@@ -39,7 +19,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     
-    <!-- Servlets -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.salonbelleza.filter.AuthenticationFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Servlets principales -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.salonbelleza.servlet.LoginServlet</servlet-class>
@@ -77,23 +67,33 @@
     
     <servlet-mapping>
         <servlet-name>EmpleadoServlet</servlet-name>
-        <url-pattern>/admin/empleados</url-pattern>
+        <url-pattern>/admin/empleados/*</url-pattern>
     </servlet-mapping>
     
-    <!-- Página de error -->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error/404.jsp</location>
-    </error-page>
+    <servlet>
+        <servlet-name>EmpleadoMemoryServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.EmpleadoMemoryServlet</servlet-class>
+    </servlet>
     
-    <error-page>
-        <error-code>500</error-code>
-        <location>/error/500.jsp</location>
-    </error-page>
+    <servlet-mapping>
+        <servlet-name>EmpleadoMemoryServlet</servlet-name>
+        <url-pattern>/admin/empleados/memory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>InitDataServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.InitDataServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>InitDataServlet</servlet-name>
+        <url-pattern>/init-data</url-pattern>
+    </servlet-mapping>
+    
     
     <!-- Página de bienvenida -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.html</welcome-file>
     </welcome-file-list>
 </web-app>

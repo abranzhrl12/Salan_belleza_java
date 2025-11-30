@@ -1,10 +1,8 @@
 package com.salonbelleza.servlet;
 
-import com.salonbelleza.dao.UsuarioDAO;
+import com.salonbelleza.dao.UsuarioDAOJDBC;
 import com.salonbelleza.model.Usuario;
-import com.salonbelleza.util.JPAUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,31 +11,23 @@ import jakarta.servlet.http.HttpSession;
 // import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * Servlet para manejar el proceso de autenticación de usuarios
  * @author Sistema Salon Belleza
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     
     // private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
-    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private final UsuarioDAOJDBC usuarioDAO = new UsuarioDAOJDBC();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Si el usuario ya está autenticado, redirigir al panel de administración
-        HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("usuario") != null) {
-            response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
-            return;
-        }
-        
-        // Mostrar página de login
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        // Redirigir directamente al panel de administración
+        System.out.println("Redirigiendo directamente al panel desde login.jsp");
+        response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
     }
     
     @Override
@@ -60,12 +50,10 @@ public class LoginServlet extends HttpServlet {
         }
         
         try {
-            // Autenticar usuario
-            Optional<Usuario> usuarioOpt = usuarioDAO.autenticar(username.trim(), password);
+            // Autenticar usuario con JDBC
+            Usuario usuario = usuarioDAO.autenticar(username.trim(), password);
             
-            if (usuarioOpt.isPresent()) {
-                Usuario usuario = usuarioOpt.get();
-                
+            if (usuario != null) {
                 // Crear sesión
                 HttpSession session = request.getSession(true);
                 session.setAttribute("usuario", usuario);
@@ -90,11 +78,9 @@ public class LoginServlet extends HttpServlet {
             
         } catch (Exception e) {
             System.out.println("Error durante el proceso de login para usuario: " + username + " - " + e.getMessage());
+            e.printStackTrace();
             request.setAttribute("error", "Error interno del servidor. Intente nuevamente.");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } finally {
-            // Cerrar EntityManager
-            JPAUtil.closeEntityManager();
         }
     }
 }

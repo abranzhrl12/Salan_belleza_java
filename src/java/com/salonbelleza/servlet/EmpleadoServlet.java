@@ -5,7 +5,6 @@ import com.salonbelleza.model.CargoEmpleado;
 import com.salonbelleza.model.Empleado;
 import com.salonbelleza.util.JPAUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,15 +13,13 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Servlet para la gestión de empleados (CRUD)
+ * Servlet para manejar las operaciones CRUD de empleados
+ * Sigue el patrón MVC - Controlador
  * @author Sistema Salon Belleza
  */
-@WebServlet(name = "EmpleadoServlet", urlPatterns = "/admin/empleados")
 public class EmpleadoServlet extends HttpServlet {
     
     private final EmpleadoDAO empleadoDAO = new EmpleadoDAO();
@@ -36,24 +33,27 @@ public class EmpleadoServlet extends HttpServlet {
         
         try {
             switch (accion != null ? accion : "listar") {
+                case "listar":
+                    listarEmpleados(request, response);
+                    break;
                 case "nuevo":
                     mostrarFormularioNuevo(request, response);
                     break;
                 case "editar":
                     mostrarFormularioEditar(request, response);
                     break;
+                case "ver":
+                    verEmpleado(request, response);
+                    break;
                 case "eliminar":
                     eliminarEmpleado(request, response);
-                    break;
-                case "buscar":
-                    buscarEmpleados(request, response);
                     break;
                 default:
                     listarEmpleados(request, response);
                     break;
             }
         } catch (Exception e) {
-            System.out.println("Error en GET del EmpleadoServlet: " + e.getMessage());
+            System.out.println("Error en GET EmpleadoServlet: " + e.getMessage());
             request.setAttribute("error", "Error interno del servidor");
             request.getRequestDispatcher("/admin/empleados/lista.jsp").forward(request, response);
         } finally {
@@ -68,19 +68,19 @@ public class EmpleadoServlet extends HttpServlet {
         String accion = request.getParameter("accion");
         
         try {
-            switch (accion) {
-                case "guardar":
-                    guardarEmpleado(request, response);
+            switch (accion != null ? accion : "crear") {
+                case "crear":
+                    crearEmpleado(request, response);
                     break;
                 case "actualizar":
                     actualizarEmpleado(request, response);
                     break;
                 default:
-                    response.sendRedirect(request.getContextPath() + "/admin/empleados");
+                    listarEmpleados(request, response);
                     break;
             }
         } catch (Exception e) {
-            System.out.println("Error en POST del EmpleadoServlet: " + e.getMessage());
+            System.out.println("Error en POST EmpleadoServlet: " + e.getMessage());
             request.setAttribute("error", "Error interno del servidor");
             request.getRequestDispatcher("/admin/empleados/lista.jsp").forward(request, response);
         } finally {
@@ -94,11 +94,15 @@ public class EmpleadoServlet extends HttpServlet {
     private void listarEmpleados(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Empleado> empleados = empleadoDAO.listarActivos();
-        request.setAttribute("empleados", empleados);
-        request.setAttribute("totalEmpleados", empleados.size());
-        
-        request.getRequestDispatcher("/admin/empleados/lista.jsp").forward(request, response);
+        try {
+            List<Empleado> empleados = empleadoDAO.listarTodos();
+            request.setAttribute("empleados", empleados);
+            request.getRequestDispatcher("/admin/empleados/lista.jsp").forward(request, response);
+        } catch (Exception e) {
+            System.out.println("Error al listar empleados: " + e.getMessage());
+            request.setAttribute("error", "Error al cargar la lista de empleados");
+            request.getRequestDispatcher("/admin/empleados/lista.jsp").forward(request, response);
+        }
     }
     
     /**
@@ -108,7 +112,6 @@ public class EmpleadoServlet extends HttpServlet {
             throws ServletException, IOException {
         
         request.setAttribute("cargos", CargoEmpleado.values());
-        request.setAttribute("accion", "nuevo");
         request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
     }
     
@@ -119,57 +122,139 @@ public class EmpleadoServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String idStr = request.getParameter("id");
-        
         if (idStr == null || idStr.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
+            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-requerido");
             return;
         }
         
         try {
             Long id = Long.parseLong(idStr);
-            Optional<Empleado> empleadoOpt = empleadoDAO.buscarPorId(id);
+            Empleado empleado = empleadoDAO.buscarPorId(id).orElse(null);
             
-            if (empleadoOpt.isPresent()) {
-                request.setAttribute("empleado", empleadoOpt.get());
-                request.setAttribute("cargos", CargoEmpleado.values());
-                request.setAttribute("accion", "editar");
-                request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
-            } else {
+            if (empleado == null) {
                 response.sendRedirect(request.getContextPath() + "/admin/empleados?error=empleado-no-encontrado");
+                return;
             }
+            
+            request.setAttribute("empleado", empleado);
+            request.setAttribute("cargos", CargoEmpleado.values());
+            request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+            
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
         }
     }
     
     /**
-     * Guarda un nuevo empleado
+     * Muestra los detalles de un empleado
      */
-    private void guardarEmpleado(HttpServletRequest request, HttpServletResponse response)
+    private void verEmpleado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String idStr = request.getParameter("id");
+        if (idStr == null || idStr.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-requerido");
+            return;
+        }
+        
+        try {
+            Long id = Long.parseLong(idStr);
+            Empleado empleado = empleadoDAO.buscarPorId(id).orElse(null);
+            
+            if (empleado == null) {
+                response.sendRedirect(request.getContextPath() + "/admin/empleados?error=empleado-no-encontrado");
+                return;
+            }
+            
+            request.setAttribute("empleado", empleado);
+            request.getRequestDispatcher("/admin/empleados/detalle.jsp").forward(request, response);
+            
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
+        }
+    }
+    
+    /**
+     * Crea un nuevo empleado
+     */
+    private void crearEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         try {
-            Empleado empleado = crearEmpleadoDesdeRequest(request);
+            // Obtener parámetros del formulario
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String telefono = request.getParameter("telefono");
+            String email = request.getParameter("email");
+            String cargoStr = request.getParameter("cargo");
+            String salarioStr = request.getParameter("salario");
+            String direccion = request.getParameter("direccion");
+            String fechaNacimientoStr = request.getParameter("fechaNacimiento");
             
-            // Validar que el email no exista
-            if (empleadoDAO.existeEmail(empleado.getEmail())) {
-                request.setAttribute("error", "Ya existe un empleado con este email");
+            // Validaciones básicas
+            if (nombre == null || nombre.trim().isEmpty() ||
+                apellido == null || apellido.trim().isEmpty() ||
+                telefono == null || telefono.trim().isEmpty() ||
+                email == null || email.trim().isEmpty() ||
+                cargoStr == null || cargoStr.trim().isEmpty()) {
+                
+                request.setAttribute("error", "Todos los campos obligatorios deben ser completados");
                 request.setAttribute("cargos", CargoEmpleado.values());
-                request.setAttribute("accion", "nuevo");
                 request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
                 return;
             }
             
+            // Crear empleado
+            Empleado empleado = new Empleado();
+            empleado.setNombre(nombre.trim());
+            empleado.setApellido(apellido.trim());
+            empleado.setTelefono(telefono.trim());
+            empleado.setEmail(email.trim());
+            empleado.setCargo(CargoEmpleado.valueOf(cargoStr));
+            empleado.setDireccion(direccion != null ? direccion.trim() : null);
+            empleado.setActivo(true);
+            
+            // Procesar salario
+            if (salarioStr != null && !salarioStr.trim().isEmpty()) {
+                try {
+                    empleado.setSalario(new BigDecimal(salarioStr));
+                } catch (NumberFormatException e) {
+                    request.setAttribute("error", "El salario debe ser un número válido");
+                    request.setAttribute("cargos", CargoEmpleado.values());
+                    request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+                    return;
+                }
+            }
+            
+            // Procesar fecha de nacimiento
+            if (fechaNacimientoStr != null && !fechaNacimientoStr.trim().isEmpty()) {
+                try {
+                    empleado.setFechaNacimiento(LocalDate.parse(fechaNacimientoStr, DATE_FORMATTER));
+                } catch (Exception e) {
+                    request.setAttribute("error", "La fecha de nacimiento debe tener el formato correcto");
+                    request.setAttribute("cargos", CargoEmpleado.values());
+                    request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+                    return;
+                }
+            }
+            
+            // Verificar si el email ya existe
+            if (empleadoDAO.existeEmail(email)) {
+                request.setAttribute("error", "Ya existe un empleado con este email");
+                request.setAttribute("cargos", CargoEmpleado.values());
+                request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+                return;
+            }
+            
+            // Guardar empleado
             empleadoDAO.guardar(empleado);
             
-            System.out.println("Empleado creado exitosamente: " + empleado.getNombreCompleto());
             response.sendRedirect(request.getContextPath() + "/admin/empleados?mensaje=empleado-creado");
             
         } catch (Exception e) {
             System.out.println("Error al crear empleado: " + e.getMessage());
-            request.setAttribute("error", "Error al crear empleado: " + e.getMessage());
+            request.setAttribute("error", "Error al crear el empleado: " + e.getMessage());
             request.setAttribute("cargos", CargoEmpleado.values());
-            request.setAttribute("accion", "nuevo");
             request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
         }
     }
@@ -180,48 +265,101 @@ public class EmpleadoServlet extends HttpServlet {
     private void actualizarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String idStr = request.getParameter("id");
-        
-        if (idStr == null || idStr.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
-            return;
-        }
-        
         try {
-            Long id = Long.parseLong(idStr);
-            Optional<Empleado> empleadoOpt = empleadoDAO.buscarPorId(id);
+            String idStr = request.getParameter("id");
+            if (idStr == null || idStr.trim().isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-requerido");
+                return;
+            }
             
-            if (!empleadoOpt.isPresent()) {
+            Long id = Long.parseLong(idStr);
+            Empleado empleado = empleadoDAO.buscarPorId(id).orElse(null);
+            
+            if (empleado == null) {
                 response.sendRedirect(request.getContextPath() + "/admin/empleados?error=empleado-no-encontrado");
                 return;
             }
             
-            Empleado empleado = empleadoOpt.get();
-            actualizarEmpleadoDesdeRequest(empleado, request);
+            // Obtener parámetros del formulario
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String telefono = request.getParameter("telefono");
+            String email = request.getParameter("email");
+            String cargoStr = request.getParameter("cargo");
+            String salarioStr = request.getParameter("salario");
+            String direccion = request.getParameter("direccion");
+            String fechaNacimientoStr = request.getParameter("fechaNacimiento");
+            String activoStr = request.getParameter("activo");
             
-            // Validar que el email no exista en otro empleado
-            Optional<Empleado> empleadoConEmail = empleadoDAO.buscarPorEmail(empleado.getEmail());
-            if (empleadoConEmail.isPresent() && !empleadoConEmail.get().getId().equals(empleado.getId())) {
-                request.setAttribute("error", "Ya existe otro empleado con este email");
+            // Validaciones básicas
+            if (nombre == null || nombre.trim().isEmpty() ||
+                apellido == null || apellido.trim().isEmpty() ||
+                telefono == null || telefono.trim().isEmpty() ||
+                email == null || email.trim().isEmpty() ||
+                cargoStr == null || cargoStr.trim().isEmpty()) {
+                
+                request.setAttribute("error", "Todos los campos obligatorios deben ser completados");
                 request.setAttribute("empleado", empleado);
                 request.setAttribute("cargos", CargoEmpleado.values());
-                request.setAttribute("accion", "editar");
                 request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
                 return;
             }
             
+            // Actualizar datos
+            empleado.setNombre(nombre.trim());
+            empleado.setApellido(apellido.trim());
+            empleado.setTelefono(telefono.trim());
+            empleado.setEmail(email.trim());
+            empleado.setCargo(CargoEmpleado.valueOf(cargoStr));
+            empleado.setDireccion(direccion != null ? direccion.trim() : null);
+            empleado.setActivo(activoStr != null && activoStr.equals("true"));
+            
+            // Procesar salario
+            if (salarioStr != null && !salarioStr.trim().isEmpty()) {
+                try {
+                    empleado.setSalario(new BigDecimal(salarioStr));
+                } catch (NumberFormatException e) {
+                    request.setAttribute("error", "El salario debe ser un número válido");
+                    request.setAttribute("empleado", empleado);
+                    request.setAttribute("cargos", CargoEmpleado.values());
+                    request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+                    return;
+                }
+            }
+            
+            // Procesar fecha de nacimiento
+            if (fechaNacimientoStr != null && !fechaNacimientoStr.trim().isEmpty()) {
+                try {
+                    empleado.setFechaNacimiento(LocalDate.parse(fechaNacimientoStr, DATE_FORMATTER));
+                } catch (Exception e) {
+                    request.setAttribute("error", "La fecha de nacimiento debe tener el formato correcto");
+                    request.setAttribute("empleado", empleado);
+                    request.setAttribute("cargos", CargoEmpleado.values());
+                    request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+                    return;
+                }
+            }
+            
+            // Verificar si el email ya existe (excluyendo el empleado actual)
+            if (!empleado.getEmail().equals(email) && empleadoDAO.existeEmail(email)) {
+                request.setAttribute("error", "Ya existe un empleado con este email");
+                request.setAttribute("empleado", empleado);
+                request.setAttribute("cargos", CargoEmpleado.values());
+                request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
+                return;
+            }
+            
+            // Actualizar empleado
             empleadoDAO.actualizar(empleado);
             
-            System.out.println("Empleado actualizado exitosamente: " + empleado.getNombreCompleto());
             response.sendRedirect(request.getContextPath() + "/admin/empleados?mensaje=empleado-actualizado");
             
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
         } catch (Exception e) {
             System.out.println("Error al actualizar empleado: " + e.getMessage());
-            request.setAttribute("error", "Error al actualizar empleado: " + e.getMessage());
+            request.setAttribute("error", "Error al actualizar el empleado: " + e.getMessage());
             request.setAttribute("cargos", CargoEmpleado.values());
-            request.setAttribute("accion", "editar");
             request.getRequestDispatcher("/admin/empleados/formulario.jsp").forward(request, response);
         }
     }
@@ -232,159 +370,31 @@ public class EmpleadoServlet extends HttpServlet {
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String idStr = request.getParameter("id");
-        
-        if (idStr == null || idStr.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
-            return;
-        }
-        
         try {
-            Long id = Long.parseLong(idStr);
-            Optional<Empleado> empleadoOpt = empleadoDAO.buscarPorId(id);
-            
-            if (empleadoOpt.isPresent()) {
-                empleadoDAO.eliminar(id);
-                System.out.println("Empleado eliminado exitosamente: " + empleadoOpt.get().getNombreCompleto());
-                response.sendRedirect(request.getContextPath() + "/admin/empleados?mensaje=empleado-eliminado");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/admin/empleados?error=empleado-no-encontrado");
+            String idStr = request.getParameter("id");
+            if (idStr == null || idStr.trim().isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-requerido");
+                return;
             }
+            
+            Long id = Long.parseLong(idStr);
+            Empleado empleado = empleadoDAO.buscarPorId(id).orElse(null);
+            
+            if (empleado == null) {
+                response.sendRedirect(request.getContextPath() + "/admin/empleados?error=empleado-no-encontrado");
+                return;
+            }
+            
+            // Eliminar empleado (eliminación lógica)
+            empleadoDAO.eliminar(id);
+            
+            response.sendRedirect(request.getContextPath() + "/admin/empleados?mensaje=empleado-eliminado");
+            
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/admin/empleados?error=id-invalido");
-        }
-    }
-    
-    /**
-     * Busca empleados por nombre
-     */
-    private void buscarEmpleados(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String termino = request.getParameter("termino");
-        
-        if (termino == null || termino.trim().isEmpty()) {
-            listarEmpleados(request, response);
-            return;
-        }
-        
-        List<Empleado> empleados = empleadoDAO.buscarPorNombre(termino.trim());
-        request.setAttribute("empleados", empleados);
-        request.setAttribute("terminoBusqueda", termino.trim());
-        request.setAttribute("totalEmpleados", empleados.size());
-        
-        request.getRequestDispatcher("/admin/empleados/lista.jsp").forward(request, response);
-    }
-    
-    /**
-     * Crea un nuevo empleado desde los parámetros de la petición
-     */
-    private Empleado crearEmpleadoDesdeRequest(HttpServletRequest request) {
-        Empleado empleado = new Empleado();
-        
-        empleado.setNombre(request.getParameter("nombre"));
-        empleado.setApellido(request.getParameter("apellido"));
-        empleado.setEmail(request.getParameter("email"));
-        empleado.setTelefono(request.getParameter("telefono"));
-        empleado.setDireccion(request.getParameter("direccion"));
-        
-        // Fecha de nacimiento
-        String fechaNacimientoStr = request.getParameter("fechaNacimiento");
-        if (fechaNacimientoStr != null && !fechaNacimientoStr.trim().isEmpty()) {
-            try {
-                empleado.setFechaNacimiento(LocalDate.parse(fechaNacimientoStr, DATE_FORMATTER));
-            } catch (DateTimeParseException e) {
-                System.out.println("Fecha de nacimiento inválida: " + fechaNacimientoStr);
-            }
-        }
-        
-        // Fecha de contratación
-        String fechaContratacionStr = request.getParameter("fechaContratacion");
-        if (fechaContratacionStr != null && !fechaContratacionStr.trim().isEmpty()) {
-            try {
-                empleado.setFechaContratacion(LocalDate.parse(fechaContratacionStr, DATE_FORMATTER));
-            } catch (DateTimeParseException e) {
-                System.out.println("Fecha de contratación inválida: " + fechaContratacionStr);
-                empleado.setFechaContratacion(LocalDate.now());
-            }
-        } else {
-            empleado.setFechaContratacion(LocalDate.now());
-        }
-        
-        // Cargo
-        String cargoStr = request.getParameter("cargo");
-        if (cargoStr != null && !cargoStr.trim().isEmpty()) {
-            try {
-                empleado.setCargo(CargoEmpleado.valueOf(cargoStr));
-            } catch (IllegalArgumentException e) {
-                System.out.println("Cargo inválido: " + cargoStr);
-                empleado.setCargo(CargoEmpleado.ASISTENTE);
-            }
-        } else {
-            empleado.setCargo(CargoEmpleado.ASISTENTE);
-        }
-        
-        // Salario
-        String salarioStr = request.getParameter("salario");
-        if (salarioStr != null && !salarioStr.trim().isEmpty()) {
-            try {
-                empleado.setSalario(new BigDecimal(salarioStr));
-            } catch (NumberFormatException e) {
-                System.out.println("Salario inválido: " + salarioStr);
-            }
-        }
-        
-        return empleado;
-    }
-    
-    /**
-     * Actualiza un empleado existente desde los parámetros de la petición
-     */
-    private void actualizarEmpleadoDesdeRequest(Empleado empleado, HttpServletRequest request) {
-        empleado.setNombre(request.getParameter("nombre"));
-        empleado.setApellido(request.getParameter("apellido"));
-        empleado.setEmail(request.getParameter("email"));
-        empleado.setTelefono(request.getParameter("telefono"));
-        empleado.setDireccion(request.getParameter("direccion"));
-        
-        // Fecha de nacimiento
-        String fechaNacimientoStr = request.getParameter("fechaNacimiento");
-        if (fechaNacimientoStr != null && !fechaNacimientoStr.trim().isEmpty()) {
-            try {
-                empleado.setFechaNacimiento(LocalDate.parse(fechaNacimientoStr, DATE_FORMATTER));
-            } catch (DateTimeParseException e) {
-                System.out.println("Fecha de nacimiento inválida: " + fechaNacimientoStr);
-            }
-        }
-        
-        // Fecha de contratación
-        String fechaContratacionStr = request.getParameter("fechaContratacion");
-        if (fechaContratacionStr != null && !fechaContratacionStr.trim().isEmpty()) {
-            try {
-                empleado.setFechaContratacion(LocalDate.parse(fechaContratacionStr, DATE_FORMATTER));
-            } catch (DateTimeParseException e) {
-                System.out.println("Fecha de contratación inválida: " + fechaContratacionStr);
-            }
-        }
-        
-        // Cargo
-        String cargoStr = request.getParameter("cargo");
-        if (cargoStr != null && !cargoStr.trim().isEmpty()) {
-            try {
-                empleado.setCargo(CargoEmpleado.valueOf(cargoStr));
-            } catch (IllegalArgumentException e) {
-                System.out.println("Cargo inválido: " + cargoStr);
-            }
-        }
-        
-        // Salario
-        String salarioStr = request.getParameter("salario");
-        if (salarioStr != null && !salarioStr.trim().isEmpty()) {
-            try {
-                empleado.setSalario(new BigDecimal(salarioStr));
-            } catch (NumberFormatException e) {
-                System.out.println("Salario inválido: " + salarioStr);
-            }
+        } catch (Exception e) {
+            System.out.println("Error al eliminar empleado: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/admin/empleados?error=error-eliminar");
         }
     }
 }

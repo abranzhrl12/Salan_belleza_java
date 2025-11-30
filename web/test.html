@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Aplicación - Salon de Belleza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-link {
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+        .info {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Salon de Belleza - Sistema de Gestión</h1>
+        
+        <div class="info">
+            <h3>Estado de la Aplicación</h3>
+            <p>✅ Aplicación desplegada correctamente</p>
+            <p>✅ Servidor funcionando</p>
+            <p>✅ Páginas estáticas accesibles</p>
+        </div>
+        
+        <h3>Pruebas Disponibles:</h3>
+        
+        <a href="basic-test" class="test-link">
+            ✅ Prueba Básica (Sin Base de Datos)
+        </a>
+        
+        <a href="simple-test" class="test-link">
+            🔧 Prueba Simple de Conexión (Sin JPA)
+        </a>
+        
+        <a href="test-connection-simple" class="test-link">
+            🗄️ Prueba Simple de Base de Datos (JPA Simplificado)
+        </a>
+        
+        <div class="info">
+            <h4>Instrucciones:</h4>
+            <ol>
+                <li>Primero prueba la <strong>Prueba Básica</strong> para verificar que los servlets funcionan</li>
+                <li>Luego prueba la <strong>Prueba Simple</strong> para verificar la conexión básica</li>
+                <li>Si funciona, prueba la <strong>Prueba Simple de Base de Datos</strong> para verificar JPA</li>
+                <li>Una vez que todo funcione, podrás habilitar los servlets principales</li>
+            </ol>
+        </div>
+        
+        <div class="info">
+            <h4>Información Técnica:</h4>
+            <p><strong>Servidor:</strong> Apache Tomcat 10.1.44</p>
+            <p><strong>Java:</strong> Jakarta EE</p>
+            <p><strong>Base de Datos:</strong> MySQL (Aiven Cloud)</p>
+            <p><strong>ORM:</strong> Hibernate 6.2.7</p>
+        </div>
+    </div>
+</body>
+</html>

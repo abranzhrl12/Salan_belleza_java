@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    
+    <display-name>Salon de Belleza - Minimal</display-name>
+    <description>Versión mínima para pruebas</description>
+    
+    <!-- Solo servlet básico -->
+    <servlet>
+        <servlet-name>BasicTestServlet</servlet-name>
+        <servlet-class>com.salonbelleza.servlet.BasicTestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>BasicTestServlet</servlet-name>
+        <url-pattern>/basic-test</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Página de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>test.html</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

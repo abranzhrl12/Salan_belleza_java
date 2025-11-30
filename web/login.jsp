@@ -148,6 +148,16 @@
                                 Crear Cuenta
                             </a>
                         </div>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="text-center">
+                            <p class="mb-0 text-muted">¿Primera vez usando el sistema?</p>
+                            <a href="${pageContext.request.contextPath}/setup.jsp" class="btn btn-outline-warning">
+                                <i class="bi bi-gear me-2"></i>
+                                Configurar Sistema
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
