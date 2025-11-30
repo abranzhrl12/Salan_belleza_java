@@ -495,7 +495,7 @@
                     <div class="col-lg-4">
                         <div class="table-container">
                             <div class="card-header bg-white">
-                                <h6 class="m-0 font-weight-bold text-primary">Empleados Activos</h6>
+                                <h6 class="m-0 font-weight-bold text-primary" data-i18n="admin.active_emp.title">Empleados Activos</h6>
                             </div>
                             <div class="card-body p-4">
                                 <div class="employee-item d-flex align-items-center p-3 mb-3 bg-light rounded-3 border-start border-4 border-primary">
@@ -567,5 +567,9 @@
             }
         });
     </script>
+    <button id="langToggle" class="btn btn-dark" style="position: fixed; bottom: 30px; left: 30px; z-index: 1000; border-radius: 50%; width: 65px; height: 65px; padding: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <span style="font-size: 1.2rem;">🇺🇸</span>
+    </button>
+    <script src="../../js/translation.js"></script>
 </body>
 </html>

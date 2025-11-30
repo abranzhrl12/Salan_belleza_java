@@ -51,6 +51,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 2px;
         }
+        
     </style>
     </head>
     <body>
@@ -67,25 +68,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#inicio">Inicio</a>
+                        <a class="nav-link" href="#inicio" data-i18n="nav.home">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#servicios">Servicios</a>
+                        <a class="nav-link" href="#servicios" data-i18n="nav.services">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#equipo">Equipo</a>
+                        <a class="nav-link" href="#equipo" data-i18n="nav.team">Equipo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testimonios">Testimonios</a>
+                        <a class="nav-link" href="#testimonios" data-i18n="nav.testimonials">Testimonios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#promociones">Promociones</a>
+                        <a class="nav-link" href="#promociones" data-i18n="nav.promotions">Promociones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#faq">FAQ</a>
+                        <a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contacto">Contacto</a>
+                        <a class="nav-link" href="#contacto" data-i18n="nav.contact">Contacto</a>
                     </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary text-white ms-2" href="login.html">
@@ -93,6 +94,7 @@
                                 Acceso Admin
                             </a>
                         </li>
+
                 </ul>
             </div>
         </div>
@@ -103,10 +105,10 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4">
+                    <h1 class="display-4 fw-bold mb-4" data-i18n="hero.title">
                         Tu Belleza es Nuestra Pasión
                     </h1>
-                    <p class="lead mb-4">
+                    <p class="lead mb-4" data-i18n="hero.subtitle">
                         Descubre los mejores tratamientos de belleza y cuidado personal 
                         en nuestro salón especializado. Profesionales expertos y productos 
                         de alta calidad para realzar tu belleza natural.
@@ -114,11 +116,11 @@
                     <div class="d-flex gap-3">
                         <a href="#servicios" class="btn btn-primary btn-lg">
                             <i class="bi bi-star-fill me-2"></i>
-                            Nuestros Servicios
+                            <span data-i18n="hero.services_btn">Nuestros Servicios</span>
                         </a>
                         <a href="#contacto" class="btn btn-outline-light btn-lg">
                             <i class="bi bi-telephone-fill me-2"></i>
-                            Contactar
+                            <span data-i18n="hero.contact_btn">Contactar</span>
                         </a>
                     </div>
                 </div>
@@ -132,19 +134,19 @@
     <!-- Servicios Section -->
     <section id="servicios" class="py-5">
         <div class="container">
-            <h2 class="text-center section-title">Nuestros Servicios</h2>
-            <p class="text-center text-muted mb-5">Descubre nuestra amplia gama de servicios de belleza y bienestar</p>
+            <h2 class="text-center section-title" data-i18n="services.title">Nuestros Servicios</h2>
+            <p class="text-center text-muted mb-5" data-i18n="services.subtitle">Descubre nuestra amplia gama de servicios de belleza y bienestar</p>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="card service-card h-100">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-scissors text-primary display-4 mb-3"></i>
-                            <h5 class="card-title">Cortes y Peinados</h5>
-                            <p class="card-text">
+                            <h5 class="card-title" data-i18n="services.cuts.title">Cortes y Peinados</h5>
+                            <p class="card-text" data-i18n="services.cuts.desc">
                                 Cortes modernos y peinados elegantes adaptados a tu estilo personal.
                             </p>
                             <div class="mt-3">
-                                <span class="badge bg-primary">Desde $25</span>
+                                <span class="badge bg-primary" data-i18n="services.cuts.price">Desde $25</span>
                             </div>
                         </div>
                     </div>
@@ -153,12 +155,12 @@
                     <div class="card service-card h-100">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-palette text-primary display-4 mb-3"></i>
-                            <h5 class="card-title">Coloración</h5>
-                            <p class="card-text">
+                            <h5 class="card-title" data-i18n="services.color.title">Coloración</h5>
+                            <p class="card-text" data-i18n="services.color.desc">
                                 Técnicas de coloración profesionales para un look único y vibrante.
                             </p>
                             <div class="mt-3">
-                                <span class="badge bg-primary">Desde $45</span>
+                                <span class="badge bg-primary" data-i18n="services.color.price">Desde $45</span>
                             </div>
                         </div>
                     </div>
@@ -167,12 +169,12 @@
                     <div class="card service-card h-100">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-hand-index text-primary display-4 mb-3"></i>
-                            <h5 class="card-title">Manicure y Pedicure</h5>
-                            <p class="card-text">
+                            <h5 class="card-title" data-i18n="services.manicure.title">Manicure y Pedicure</h5>
+                            <p class="card-text" data-i18n="services.manicure.desc">
                                 Cuidado completo de uñas con diseños creativos y tratamientos especiales.
                             </p>
                             <div class="mt-3">
-                                <span class="badge bg-primary">Desde $20</span>
+                                <span class="badge bg-primary" data-i18n="services.manicure.price">Desde $20</span>
                             </div>
                         </div>
                     </div>
@@ -181,12 +183,12 @@
                     <div class="card service-card h-100">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-heart text-primary display-4 mb-3"></i>
-                            <h5 class="card-title">Tratamientos Faciales</h5>
-                            <p class="card-text">
+                            <h5 class="card-title" data-i18n="services.facial.title">Tratamientos Faciales</h5>
+                            <p class="card-text" data-i18n="services.facial.desc">
                                 Limpieza profunda y tratamientos faciales para una piel radiante.
                             </p>
                             <div class="mt-3">
-                                <span class="badge bg-primary">Desde $35</span>
+                                <span class="badge bg-primary" data-i18n="services.facial.price">Desde $35</span>
                             </div>
                         </div>
                     </div>
@@ -195,12 +197,12 @@
                     <div class="card service-card h-100">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-droplet text-primary display-4 mb-3"></i>
-                            <h5 class="card-title">Tratamientos Corporales</h5>
-                            <p class="card-text">
+                            <h5 class="card-title" data-i18n="services.body.title">Tratamientos Corporales</h5>
+                            <p class="card-text" data-i18n="services.body.desc">
                                 Relajantes masajes y tratamientos corporales para tu bienestar.
                             </p>
                             <div class="mt-3">
-                                <span class="badge bg-primary">Desde $50</span>
+                                <span class="badge bg-primary" data-i18n="services.body.price">Desde $50</span>
                             </div>
                         </div>
                     </div>
@@ -209,12 +211,12 @@
                     <div class="card service-card h-100">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-star text-primary display-4 mb-3"></i>
-                            <h5 class="card-title">Servicios Especiales</h5>
-                            <p class="card-text">
+                            <h5 class="card-title" data-i18n="services.special.title">Servicios Especiales</h5>
+                            <p class="card-text" data-i18n="services.special.desc">
                                 Tratamientos premium y servicios personalizados para ocasiones especiales.
                             </p>
                             <div class="mt-3">
-                                <span class="badge bg-primary">Desde $80</span>
+                                <span class="badge bg-primary" data-i18n="services.special.price">Desde $80</span>
                             </div>
                         </div>
                     </div>
@@ -225,7 +227,7 @@
             <div class="text-center mt-5">
                 <a href="#contacto" class="btn btn-primary btn-lg">
                     <i class="bi bi-calendar-check me-2"></i>
-                    Reservar Cita
+                    <span data-i18n="services.book_btn">Reservar Cita</span>
                 </a>
             </div>
         </div>
@@ -234,8 +236,8 @@
     <!-- Equipo Section -->
     <section id="equipo" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center section-title">Nuestro Equipo</h2>
-            <p class="text-center text-muted mb-5">Conoce a nuestros profesionales expertos en belleza</p>
+            <h2 class="text-center section-title" data-i18n="team.title">Nuestro Equipo</h2>
+            <p class="text-center text-muted mb-5" data-i18n="team.subtitle">Conoce a nuestros profesionales expertos en belleza</p>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="card team-card h-100 border-0">
@@ -244,8 +246,8 @@
                                 <i class="bi bi-person-circle display-1 text-primary"></i>
                             </div>
                             <h5 class="card-title">Ana López</h5>
-                            <p class="text-muted">Estilista Senior</p>
-                            <p class="card-text small">
+                            <p class="text-muted" data-i18n="team.ana.role">Estilista Senior</p>
+                            <p class="card-text small" data-i18n="team.ana.desc">
                                 Especialista en cortes modernos y coloración. 8 años de experiencia.
                             </p>
                             <div class="mt-3">
@@ -265,8 +267,8 @@
                                 <i class="bi bi-person-circle display-1 text-primary"></i>
                             </div>
                             <h5 class="card-title">Carlos Martínez</h5>
-                            <p class="text-muted">Colorista Profesional</p>
-                            <p class="card-text small">
+                            <p class="text-muted" data-i18n="team.carlos.role">Colorista Profesional</p>
+                            <p class="card-text small" data-i18n="team.carlos.desc">
                                 Experto en técnicas de coloración avanzadas y tratamientos químicos.
                             </p>
                             <div class="mt-3">
@@ -286,8 +288,8 @@
                                 <i class="bi bi-person-circle display-1 text-primary"></i>
                             </div>
                             <h5 class="card-title">María González</h5>
-                            <p class="text-muted">Manicurista</p>
-                            <p class="card-text small">
+                            <p class="text-muted" data-i18n="team.maria.role">Manicurista</p>
+                            <p class="card-text small" data-i18n="team.maria.desc">
                                 Especialista en nail art y tratamientos de uñas. Diseños únicos y creativos.
                             </p>
                             <div class="mt-3">
@@ -307,8 +309,8 @@
                                 <i class="bi bi-person-circle display-1 text-primary"></i>
                             </div>
                             <h5 class="card-title">Pedro Sánchez</h5>
-                            <p class="text-muted">Esteticista</p>
-                            <p class="card-text small">
+                            <p class="text-muted" data-i18n="team.pedro.role">Esteticista</p>
+                            <p class="card-text small" data-i18n="team.pedro.desc">
                                 Experto en tratamientos faciales y corporales. Técnicas de relajación.
                             </p>
                             <div class="mt-3">
@@ -328,8 +330,8 @@
     <!-- Testimonios Section -->
     <section id="testimonios" class="py-5">
         <div class="container">
-            <h2 class="text-center section-title">Lo que dicen nuestros clientes</h2>
-            <p class="text-center text-muted mb-5">Testimonios reales de clientes satisfechos</p>
+            <h2 class="text-center section-title" data-i18n="testimonials.title">Lo que dicen nuestros clientes</h2>
+            <p class="text-center text-muted mb-5" data-i18n="testimonials.subtitle">Testimonios reales de clientes satisfechos</p>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="card testimonial-card h-100 border-0">
@@ -337,13 +339,13 @@
                             <div class="text-center mb-3">
                                 <i class="bi bi-quote display-4 text-primary opacity-25"></i>
                             </div>
-                            <p class="card-text text-center mb-4">
+                            <p class="card-text text-center mb-4" data-i18n="testimonials.laura">
                                 "Excelente servicio y atención. Ana me hizo un corte perfecto que me encanta. 
                                 Definitivamente volveré."
                             </p>
                             <div class="text-center">
                                 <h6 class="mb-1">Laura Rodríguez</h6>
-                                <small class="text-muted">Cliente desde 2022</small>
+                                <small class="text-muted" data-i18n="testimonials.laura.role">Cliente desde 2022</small>
                                 <div class="mt-2">
                                     <i class="bi bi-star-fill text-warning"></i>
                                     <i class="bi bi-star-fill text-warning"></i>
@@ -361,13 +363,13 @@
                             <div class="text-center mb-3">
                                 <i class="bi bi-quote display-4 text-primary opacity-25"></i>
                             </div>
-                            <p class="card-text text-center mb-4">
+                            <p class="card-text text-center mb-4" data-i18n="testimonials.carmen">
                                 "El mejor salón de la ciudad. Carlos es un genio con los colores. 
                                 Mi cabello nunca se había visto tan bien."
                             </p>
                             <div class="text-center">
                                 <h6 class="mb-1">Carmen Díaz</h6>
-                                <small class="text-muted">Cliente desde 2021</small>
+                                <small class="text-muted" data-i18n="testimonials.carmen.role">Cliente desde 2021</small>
                                 <div class="mt-2">
                                     <i class="bi bi-star-fill text-warning"></i>
                                     <i class="bi bi-star-fill text-warning"></i>
@@ -385,13 +387,13 @@
                             <div class="text-center mb-3">
                                 <i class="bi bi-quote display-4 text-primary opacity-25"></i>
                             </div>
-                            <p class="card-text text-center mb-4">
+                            <p class="card-text text-center mb-4" data-i18n="testimonials.isabel">
                                 "Ambiente relajante y profesionales muy capacitados. 
                                 Los tratamientos faciales son increíbles."
                             </p>
                             <div class="text-center">
                                 <h6 class="mb-1">Isabel Torres</h6>
-                                <small class="text-muted">Cliente desde 2023</small>
+                                <small class="text-muted" data-i18n="testimonials.isabel.role">Cliente desde 2023</small>
                                 <div class="mt-2">
                                     <i class="bi bi-star-fill text-warning"></i>
                                     <i class="bi bi-star-fill text-warning"></i>
@@ -410,73 +412,73 @@
     <!-- Promociones Section -->
     <section id="promociones" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center section-title">Promociones Especiales</h2>
-            <p class="text-center text-muted mb-5">Aprovecha nuestras ofertas limitadas</p>
+            <h2 class="text-center section-title" data-i18n="promotions.title">Promociones Especiales</h2>
+            <p class="text-center text-muted mb-5" data-i18n="promotions.subtitle">Aprovecha nuestras ofertas limitadas</p>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="card promotion-card h-100 border-0 shadow">
-                        <div class="card-header bg-primary text-white text-center">
-                            <h5 class="mb-0">Paquete Belleza Completa</h5>
-                        </div>
-                        <div class="card-body text-center p-4">
-                            <div class="promotion-price mb-3">
-                                <span class="h2 text-primary">$120</span>
-                                <small class="text-muted text-decoration-line-through ms-2">$150</small>
+                            <div class="card-header bg-primary text-white text-center">
+                                <h5 class="mb-0" data-i18n="promotions.full.title">Paquete Belleza Completa</h5>
                             </div>
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Corte y peinado</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Manicure completa</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Tratamiento facial</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Masaje relajante</li>
-                            </ul>
-                            <a href="#contacto" class="btn btn-primary">Reservar Ahora</a>
+                            <div class="card-body text-center p-4">
+                                <div class="promotion-price mb-3">
+                                    <span class="h2 text-primary">$120</span>
+                                    <small class="text-muted text-decoration-line-through ms-2">$150</small>
+                                </div>
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.full.item1">Corte y peinado</span></li>
+                                    <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.full.item2">Manicure completa</span></li>
+                                    <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.full.item3">Tratamiento facial</span></li>
+                                    <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.full.item4">Masaje relajante</span></li>
+                                </ul>
+                            <a href="#contacto" class="btn btn-primary" data-i18n="promotions.full.btn">Reservar Ahora</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="card promotion-card h-100 border-0 shadow">
                         <div class="card-header bg-success text-white text-center">
-                            <h5 class="mb-0">Primera Visita</h5>
+                            <h5 class="mb-0" data-i18n="promotions.first.title">Primera Visita</h5>
                         </div>
                         <div class="card-body text-center p-4">
                             <div class="promotion-price mb-3">
-                                <span class="h2 text-success">20% OFF</span>
+                                <span class="h2 text-success" data-i18n="promotions.first.discount">20% OFF</span>
                             </div>
-                            <p class="card-text">
+                            <p class="card-text" data-i18n="promotions.first.desc">
                                 Descuento especial para nuevos clientes en su primera visita.
                             </p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Válido para cualquier servicio</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Una sola vez por cliente</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Válido por 30 días</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.first.item1">Válido para cualquier servicio</span></li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.first.item2">Una sola vez por cliente</span></li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.first.item3">Válido por 30 días</span></li>
                             </ul>
-                            <a href="#contacto" class="btn btn-success">Aprovechar Oferta</a>
+                            <a href="#contacto" class="btn btn-success" data-i18n="promotions.first.btn">Aprovechar Oferta</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="card promotion-card h-100 border-0 shadow">
                         <div class="card-header bg-warning text-white text-center">
-                            <h5 class="mb-0">Día de la Madre</h5>
+                            <h5 class="mb-0" data-i18n="promotions.mother.title">Día de la Madre</h5>
                         </div>
                         <div class="card-body text-center p-4">
                             <div class="promotion-price mb-3">
-                                <span class="h2 text-warning">30% OFF</span>
+                                <span class="h2 text-warning" data-i18n="promotions.mother.discount">30% OFF</span>
                             </div>
-                            <p class="card-text">
+                            <p class="card-text" data-i18n="promotions.mother.desc">
                                 Celebra el Día de la Madre con nuestros tratamientos especiales.
                             </p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Tratamientos faciales</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Manicure y pedicure</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Masajes relajantes</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.mother.item1">Tratamientos faciales</span></li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.mother.item2">Manicure y pedicure</span></li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i><span data-i18n="promotions.mother.item3">Masajes relajantes</span></li>
                             </ul>
-                            <a href="#contacto" class="btn btn-warning">Reservar Cita</a>
+                            <a href="#contacto" class="btn btn-warning" data-i18n="promotions.mother.btn">Reservar Cita</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+                            </div>
     </section>
 
     <!-- Nosotros Section -->
@@ -484,14 +486,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="section-title">¿Por qué elegirnos?</h2>
+                    <h2 class="section-title" data-i18n="about.title">¿Por qué elegirnos?</h2>
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="d-flex">
                                 <i class="bi bi-award-fill text-primary fs-4 me-3"></i>
                                 <div>
-                                    <h6 class="mb-1">Profesionales Certificados</h6>
-                                    <p class="text-muted mb-0">Nuestro equipo cuenta con certificaciones y experiencia comprobada.</p>
+                                    <h6 class="mb-1" data-i18n="about.pro.title">Profesionales Certificados</h6>
+                                    <p class="text-muted mb-0" data-i18n="about.pro.desc">Nuestro equipo cuenta con certificaciones y experiencia comprobada.</p>
                                 </div>
                             </div>
                         </div>
@@ -499,8 +501,8 @@
                             <div class="d-flex">
                                 <i class="bi bi-shield-check-fill text-primary fs-4 me-3"></i>
                                 <div>
-                                    <h6 class="mb-1">Productos de Calidad</h6>
-                                    <p class="text-muted mb-0">Utilizamos solo productos premium y de marcas reconocidas.</p>
+                                    <h6 class="mb-1" data-i18n="about.products.title">Productos de Calidad</h6>
+                                    <p class="text-muted mb-0" data-i18n="about.products.desc">Utilizamos solo productos premium y de marcas reconocidas.</p>
                                 </div>
                             </div>
                         </div>
@@ -508,8 +510,8 @@
                             <div class="d-flex">
                                 <i class="bi bi-clock-fill text-primary fs-4 me-3"></i>
                                 <div>
-                                    <h6 class="mb-1">Horarios Flexibles</h6>
-                                    <p class="text-muted mb-0">Atención de lunes a sábado con horarios que se adaptan a ti.</p>
+                                    <h6 class="mb-1" data-i18n="about.hours.title">Horarios Flexibles</h6>
+                                    <p class="text-muted mb-0" data-i18n="about.hours.desc">Atención de lunes a sábado con horarios que se adaptan a ti.</p>
                                 </div>
                             </div>
                         </div>
@@ -517,8 +519,8 @@
                             <div class="d-flex">
                                 <i class="bi bi-heart-fill text-primary fs-4 me-3"></i>
                                 <div>
-                                    <h6 class="mb-1">Ambiente Relajante</h6>
-                                    <p class="text-muted mb-0">Un espacio diseñado para tu comodidad y relajación.</p>
+                                    <h6 class="mb-1" data-i18n="about.relax.title">Ambiente Relajante</h6>
+                                    <p class="text-muted mb-0" data-i18n="about.relax.desc">Un espacio diseñado para tu comodidad y relajación.</p>
                                 </div>
                             </div>
                         </div>
@@ -534,15 +536,15 @@
     <!-- Contacto Section -->
     <section id="contacto" class="py-5">
         <div class="container">
-            <h2 class="text-center section-title">Contáctanos</h2>
-            <p class="text-center text-muted mb-5">Estamos aquí para ayudarte a verte y sentirte increíble</p>
+            <h2 class="text-center section-title" data-i18n="contact.title">Contáctanos</h2>
+            <p class="text-center text-muted mb-5" data-i18n="contact.subtitle">Estamos aquí para ayudarte a verte y sentirte increíble</p>
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="card border-0 shadow">
                         <div class="card-body p-4">
                             <h5 class="card-title">
                                 <i class="bi bi-geo-alt-fill text-primary me-2"></i>
-                                Ubicación
+                                <span data-i18n="contact.location.title">Ubicación</span>
                             </h5>
                             <p class="card-text">
                                 Av. Principal 123, Centro<br>
@@ -552,7 +554,7 @@
                             
                             <h5 class="card-title mt-4">
                                 <i class="bi bi-telephone-fill text-primary me-2"></i>
-                                Teléfono
+                                <span data-i18n="contact.phone.title">Teléfono</span>
                             </h5>
                             <p class="card-text">
                                 <a href="tel:+1234567890" class="text-decoration-none">
@@ -562,7 +564,7 @@
                             
                             <h5 class="card-title mt-4">
                                 <i class="bi bi-envelope-fill text-primary me-2"></i>
-                                Email
+                                <span data-i18n="contact.email.title">Email</span>
                             </h5>
                             <p class="card-text">
                                 <a href="mailto:info@salonbelleza.com" class="text-decoration-none">
@@ -572,17 +574,17 @@
                             
                             <h5 class="card-title mt-4">
                                 <i class="bi bi-clock-fill text-primary me-2"></i>
-                                Horarios
+                                <span data-i18n="contact.hours.title">Horarios</span>
                             </h5>
                             <p class="card-text">
-                                Lunes - Viernes: 9:00 AM - 7:00 PM<br>
-                                Sábados: 9:00 AM - 5:00 PM<br>
-                                Domingos: 10:00 AM - 4:00 PM
+                                <span data-i18n="contact.hours.weekdays">Lunes - Viernes: 9:00 AM - 7:00 PM</span><br>
+                                <span data-i18n="contact.hours.saturday">Sábados: 9:00 AM - 5:00 PM</span><br>
+                                <span data-i18n="contact.hours.sunday">Domingos: 10:00 AM - 4:00 PM</span>
                             </p>
                             
                             <h5 class="card-title mt-4">
                                 <i class="bi bi-share-fill text-primary me-2"></i>
-                                Síguenos
+                                <span data-i18n="contact.follow.title">Síguenos</span>
                             </h5>
                             <div class="social-links">
                                 <a href="#" class="btn btn-outline-primary btn-sm me-2">
@@ -604,40 +606,40 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow">
                         <div class="card-body p-4">
-                            <h5 class="card-title">Reserva tu Cita</h5>
+                            <h5 class="card-title" data-i18n="contact.form.title">Reserva tu Cita</h5>
                             <form id="reservaForm">
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre Completo</label>
+                                    <label for="nombre" class="form-label" data-i18n="contact.form.name">Nombre Completo</label>
                                     <input type="text" class="form-control" id="nombre" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <label for="telefono" class="form-label" data-i18n="contact.form.phone">Teléfono</label>
                                     <input type="tel" class="form-control" id="telefono" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label" data-i18n="contact.form.email">Email</label>
                                     <input type="email" class="form-control" id="email" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="servicio" class="form-label">Servicio</label>
+                                    <label for="servicio" class="form-label" data-i18n="contact.form.service">Servicio</label>
                                     <select class="form-select" id="servicio" required>
-                                        <option value="">Selecciona un servicio</option>
-                                        <option value="corte">Corte y Peinado - $25</option>
-                                        <option value="coloracion">Coloración - $45</option>
-                                        <option value="manicure">Manicure - $20</option>
-                                        <option value="facial">Tratamiento Facial - $35</option>
-                                        <option value="corporal">Tratamiento Corporal - $50</option>
-                                        <option value="completo">Paquete Completo - $120</option>
+                                        <option value="" data-i18n="contact.form.select_service">Selecciona un servicio</option>
+                                        <option value="corte" data-i18n="contact.form.service.cut">Corte y Peinado - $25</option>
+                                        <option value="coloracion" data-i18n="contact.form.service.color">Coloración - $45</option>
+                                        <option value="manicure" data-i18n="contact.form.service.manicure">Manicure - $20</option>
+                                        <option value="facial" data-i18n="contact.form.service.facial">Tratamiento Facial - $35</option>
+                                        <option value="corporal" data-i18n="contact.form.service.body">Tratamiento Corporal - $50</option>
+                                        <option value="completo" data-i18n="contact.form.service.full">Paquete Completo - $120</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="fecha" class="form-label">Fecha Preferida</label>
+                                    <label for="fecha" class="form-label" data-i18n="contact.form.date">Fecha Preferida</label>
                                     <input type="date" class="form-control" id="fecha" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="hora" class="form-label">Hora Preferida</label>
+                                    <label for="hora" class="form-label" data-i18n="contact.form.time">Hora Preferida</label>
                                     <select class="form-select" id="hora" required>
-                                        <option value="">Selecciona una hora</option>
+                                        <option value="" data-i18n="contact.form.select_time">Selecciona una hora</option>
                                         <option value="09:00">9:00 AM</option>
                                         <option value="10:00">10:00 AM</option>
                                         <option value="11:00">11:00 AM</option>
@@ -651,12 +653,12 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="mensaje" class="form-label">Mensaje Adicional</label>
+                                    <label for="mensaje" class="form-label" data-i18n="contact.form.message">Mensaje Adicional</label>
                                     <textarea class="form-control" id="mensaje" rows="3" placeholder="Cuéntanos sobre tus preferencias o necesidades especiales..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="bi bi-calendar-check me-2"></i>
-                                    Reservar Cita
+                                    <span data-i18n="contact.form.submit">Reservar Cita</span>
                                 </button>
                             </form>
                         </div>
@@ -669,19 +671,19 @@
     <!-- FAQ Section -->
     <section id="faq" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center section-title">Preguntas Frecuentes</h2>
-            <p class="text-center text-muted mb-5">Resolvemos las dudas más comunes</p>
+            <h2 class="text-center section-title" data-i18n="faq.title">Preguntas Frecuentes</h2>
+            <p class="text-center text-muted mb-5" data-i18n="faq.subtitle">Resolvemos las dudas más comunes</p>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="accordion" id="faqAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq1">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-                                    ¿Necesito hacer una cita previa?
+                                    <span data-i18n="faq.q1">¿Necesito hacer una cita previa?</span>
                                 </button>
                             </h2>
                             <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body" data-i18n="faq.a1">
                                     Sí, recomendamos hacer una cita previa para garantizar la disponibilidad y el mejor servicio. 
                                     Puedes reservar llamando al salón o usando nuestro formulario online.
                                 </div>
@@ -690,11 +692,11 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                                    ¿Qué métodos de pago aceptan?
+                                    <span data-i18n="faq.q2">¿Qué métodos de pago aceptan?</span>
                                 </button>
                             </h2>
                             <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body" data-i18n="faq.a2">
                                     Aceptamos efectivo, tarjetas de crédito y débito, y transferencias bancarias. 
                                     También ofrecemos planes de pago para servicios más costosos.
                                 </div>
@@ -703,11 +705,11 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                                    ¿Ofrecen servicios para hombres?
+                                    <span data-i18n="faq.q3">¿Ofrecen servicios para hombres?</span>
                                 </button>
                             </h2>
                             <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body" data-i18n="faq.a3">
                                     ¡Por supuesto! Ofrecemos cortes de cabello, tratamientos faciales, manicure y pedicure 
                                     especializados para hombres. Tenemos estilistas expertos en cortes masculinos.
                                 </div>
@@ -716,11 +718,11 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq4">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
-                                    ¿Qué productos utilizan?
+                                    <span data-i18n="faq.q4">¿Qué productos utilizan?</span>
                                 </button>
                             </h2>
                             <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body" data-i18n="faq.a4">
                                     Utilizamos productos de alta calidad y marcas reconocidas internacionalmente. 
                                     Todos nuestros productos son profesionales y están diseñados para brindar los mejores resultados.
                                 </div>
@@ -729,11 +731,11 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq5">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
-                                    ¿Puedo cancelar o reprogramar mi cita?
+                                    <span data-i18n="faq.q5">¿Puedo cancelar o reprogramar mi cita?</span>
                                 </button>
                             </h2>
                             <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body" data-i18n="faq.a5">
                                     Sí, puedes cancelar o reprogramar tu cita con al menos 24 horas de anticipación. 
                                     Para cancelaciones de último momento, puede aplicarse una tarifa.
                                 </div>
@@ -752,13 +754,13 @@
                 <div class="col-md-6">
                     <p class="mb-0">
                         <i class="bi bi-scissors me-2"></i>
-                        © 2024 Salon de Belleza. Todos los derechos reservados.
+                        <span data-i18n="footer.copyright">© 2024 Salon de Belleza. Todos los derechos reservados.</span>
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="login.jsp" class="btn btn-outline-light btn-sm">
                         <i class="bi bi-box-arrow-in-right me-1"></i>
-                        Acceso Administrativo
+                        <span data-i18n="footer.admin_access">Acceso Administrativo</span>
                     </a>
                 </div>
             </div>
@@ -863,5 +865,9 @@
             }
         });
     </script>
+    <button id="langToggle" class="btn btn-dark" style="position: fixed; bottom: 30px; left: 30px; z-index: 1000; border-radius: 50%; width: 65px; height: 65px; padding: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <span style="font-size: 1.2rem;">🇺🇸</span>
+    </button>
+    <script src="js/translation.js"></script>
     </body>
 </html>
